@@ -67,13 +67,13 @@
 		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/purchase/listPurchase");
 			}); 
 		 	
-		 	$( ".Depth03:contains('최근 본 상품')" ).on("click" , function() {
+/* 		 	$( ".Depth03:contains('최근 본 상품')" ).on("click" , function() {
 				//Debug..
 				//alert(  $( ".Depth03:contains('회원정보조회')" ) );
 		 		$(window.parent.frames["rightFrame"].document.location).attr("href","javascript:history()");
 			}); 
 		 	
-		});	
+ */		});	
 		 
 	</script>
 	
@@ -166,9 +166,7 @@
 				<td class="DepthEnd">&nbsp;</td>
 			</tr>-->
 			<tr>
-			<td class="Depth03">
-			<!--	<td class="Depth03"><a href="javascript:history()">최근 본 상품</a></td>-->
-			최근 본 상품
+			<td class="Depth03"><a href="javascript:history()">최근 본 상품</a></td>
 			</td>
 			</tr>
 		</table>

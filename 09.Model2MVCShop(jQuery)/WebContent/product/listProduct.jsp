@@ -28,7 +28,6 @@ String searchKeyword = CommonUtil.null2str(searchVO.getSearchKeyword());
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>상품 목록조회</title>
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -49,15 +48,14 @@ function fncGetList(currentPage) {
 	});
 	
 	$(function() {
-		var p_name = getParameter("menu");
 		
 		$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
-			if("${param.menu}"=='manage'){
-				self.location = "/product/updateProduct?prodNo=${product.prodNo}&menu=${param.menu}";
-			}else if(menu='search'){
+			if("${param.menu=='manage'}"){
+				self.location = "/product/updateProduct?prodNo="+$('input:hidden[name="prodNo"]').val()+"&menu=${param.menu}";
+			}else if("${param.menu}=='search'"){
 				if("${product.proTranCode==null}"){
-				self.location = "/product/getProduct?prodNo=${product.prodNo}&menu=${param.menu}";
-				}else if("${product.proTranCode=='0  '||product.proTranCode=='1  '||product.proTranCode=='2  '}"){
+			self.location =  "/product/getProduct?prodNo="+$('input:hidden[name="prodNo"]').val()+"&menu=${param.menu}";
+			//	}else if("${product.proTranCode=='0  '||product.proTranCode=='1  '||product.proTranCode=='2  '}"){
 			}
 		 });
 	});
@@ -256,13 +254,15 @@ function fncGetList(currentPage) {
 			<td></td>
 				<c:if test = "${param.menu=='manage'}">					
 				<td align="left">
+				<input type="hidden" name="prodNo" value="${product.prodNo}">
 				<!--<a href="/product/updateProduct?prodNo=${product.prodNo}&menu=${param.menu}">${product.prodName}</a>-->
-				${product.prodName}
+				${product.prodName},${product.prodNo}
 				</td>		
 				</c:if>
 				<c:if test = "${param.menu=='search'}">
 					<c:if test = "${product.proTranCode==null}">
 				<td align="left">
+				<input type="hidden" name="prodNo" value="${product.prodNo}">
 				<!--<a href="/product/getProduct?prodNo=${product.prodNo}&menu=${param.menu}">${product.prodName}</a>-->
 				${product.prodName}
 				</td>

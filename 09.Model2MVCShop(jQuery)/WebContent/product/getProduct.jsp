@@ -24,7 +24,7 @@
 			//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 			 $( "td.ct_btn01:contains('구매')" ).on("click" , function() {
 
-				 self.location = " /purchase/addPurchase?prodNo=${productVO.prodNo}&userId=${user.userId}";
+				 self.location = "/purchase/addPurchase?prodNo=${productVO.prodNo}&userId=${user.userId}";
 			 });
 			
 			 $( "td.ct_btn01:contains('이전')" ).on("click" , function() {

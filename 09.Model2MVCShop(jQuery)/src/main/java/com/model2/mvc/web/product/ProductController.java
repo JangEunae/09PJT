@@ -122,10 +122,9 @@ public class ProductController {
 			}*/
 		
 		
-		File f = new File("C:\\Users\\bitcamp\\git\\08PJT\\08.Model2MVCShop(Rest Server)\\WebContent\\images\\uploadFiles\\"+multi.getOriginalFilename());
+		File f = new File("C:\\Users\\bitcamp\\git\\09PJT\\09.Model2MVCShop(jQuery)\\WebContent\\images\\uploadFiles\\"+multi.getOriginalFilename());
 		multi.transferTo(f);
 
-		System.out.println(multi.getOriginalFilename());
 		product.setFileName(multi.getOriginalFilename());
 		productService.addProduct(product);
 		model.addAttribute("productVO", product);
@@ -134,12 +133,15 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="getProduct")
-	public String getProduct( @RequestParam("prodNo") String prodNo , Model model, HttpServletRequest request, HttpServletResponse response ) throws Exception {
+	public String getProduct( @RequestParam("prodNo") String prodNo , @RequestParam("menu") String menu, Model model, HttpServletRequest request, HttpServletResponse response ) throws Exception {
 		
 		System.out.println("/product/getProduct : GET / POST");
 		//Business Logic
+		System.out.println("컨트롤"+prodNo);
+		System.out.println("메뉴"+menu);
 		Product product = productService.getProduct(Integer.parseInt(prodNo));
 		// Model 과 View 연결
+		System.out.println("컨트롤222"+product);
 		model.addAttribute("productVO", product);
 		
 		String str = "";

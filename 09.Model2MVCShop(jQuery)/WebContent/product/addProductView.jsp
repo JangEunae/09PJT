@@ -47,7 +47,7 @@ function fncAddProduct(){
 	//document.detailForm.action='/product/addProduct';
 	//document.detailForm.submit();
 	
-	$("form").attr("method" , "POST").attr("action" , "/product/addProduct").submit();
+	$("form").attr("method" , "POST").attr("enctype" , "multipart/form-data").attr("action" , "/product/addProduct").submit();
 }
 
 //function resetData(){
@@ -70,7 +70,7 @@ function fncAddProduct(){
 <body bgcolor="#ffffff" text="#000000">
 
 <!-- <form name="detailForm" method="post" enctype="multipart/form-data"> -->
-<form name="detailForm" enctype="multipart/form-data">
+<form name="detailForm" >
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
 		<td width="15" height="37">
