@@ -157,7 +157,7 @@
 				<!-- ////////////////// jQuery Event 처리로 변경됨 /////////////////////////
 				<a href="/user/getUser?userId=${user.userId}">${user.userId}</a>
 				////////////////////////////////////////////////////////////////////////////////////////////////// -->
-				${user.userId}
+				<ins>${user.userId}</ins>
 			</td>
 			<td></td>
 			<td align="left">${user.userName}</td>

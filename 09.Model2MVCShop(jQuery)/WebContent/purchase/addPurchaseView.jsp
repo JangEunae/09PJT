@@ -17,7 +17,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>상품 상세 조회</title>
 <script type="text/javascript" src="../javascript/calendar.js">
 </script>

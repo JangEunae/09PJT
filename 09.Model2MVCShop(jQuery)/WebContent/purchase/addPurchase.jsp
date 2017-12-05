@@ -17,14 +17,20 @@
 <html>
 <head>
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>구매 내역 확인</title>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="../javascript/calendar.js">
+</script>
+<script type="text/javascript">
+function fncAddPuerchase(){
+	
+	$("form").attr("method" , "POST").attr("action" , "/product/listProduct?menu=search").submit();
+}
+
 
 	$(function() {
-	 $( "td.ct_btn01:contains('확인')" ).on("click" , function() {
-		 self.location = "/product/listProduct?menu=search";
+		 $( "td.ct_btn02:contains('확인')" ).on("click" , function() {
+			 fncAddPuerchase();
 		});
 	});
 
@@ -33,7 +39,7 @@
 </head>
 <body>
 
-<form name="updatePurchase" action="/purchase/updatePurchase?tranNo=0" method="post">
+<form name="addPurchase" >
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
 		<td width="15" height="37">
@@ -161,7 +167,7 @@
 					<td width="17" height="23">
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
+					<td background="/images/ct_btnbg02.gif" class="ct_btn02" style="padding-top: 3px;">
 						<!-- <a href="/product/listProduct?menu=search">확인</a> -->
 						확인
 					</td>

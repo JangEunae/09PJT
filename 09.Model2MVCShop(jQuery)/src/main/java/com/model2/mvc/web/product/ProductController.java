@@ -137,11 +137,8 @@ public class ProductController {
 		
 		System.out.println("/product/getProduct : GET / POST");
 		//Business Logic
-		System.out.println("컨트롤"+prodNo);
-		System.out.println("메뉴"+menu);
 		Product product = productService.getProduct(Integer.parseInt(prodNo));
 		// Model 과 View 연결
-		System.out.println("컨트롤222"+product);
 		model.addAttribute("productVO", product);
 		
 		String str = "";
@@ -206,6 +203,7 @@ public class ProductController {
 		search.setPageSize(pageSize);
 		// Business logic 수행
 		Map<String , Object> map=productService.getProductList(search);
+		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		// Model 과 View 연결

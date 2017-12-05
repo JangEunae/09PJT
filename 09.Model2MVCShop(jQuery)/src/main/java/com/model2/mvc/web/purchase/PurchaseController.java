@@ -93,6 +93,7 @@ public class PurchaseController {
 		//Business Logic
 		purchaseVO.setBuyer(userService.getUser(userId));
 		purchaseVO.setPurchaseProd(productService.getProduct(Integer.parseInt(prodNo)));
+		
 		purchaseService.addPurchase(purchaseVO);
 		
 		//model.addAttribute("purchaseVO", purchaseVO);

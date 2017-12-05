@@ -112,7 +112,7 @@
 										 				</if>
 													</if>
 											</if>
-											<if test="search.searchOption != null">
+											<if test="search.searchOption != '' and search.searchOption != null">
 												<if test="search.searchOption == 0">
 												order by p.PRICE DESC
 												</if>
@@ -120,7 +120,10 @@
 												order by p.PRICE ASC
 												</if>
 											</if>
-											<if test="search.searchOption == null ">
+											<if test="search.searchKeyword == '' and search.searchOption == '' ">
+											ORDER BY p.prod_no
+											</if>
+											<if test="search.searchKeyword == null and search.searchOption == null ">
 											ORDER BY p.prod_no
 											</if>
 											) countTable						

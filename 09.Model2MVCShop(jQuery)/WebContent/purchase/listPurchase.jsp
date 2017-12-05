@@ -31,7 +31,7 @@ String searchKeyword = CommonUtil.null2str(searchVO.getSearchKeyword());
 <title>구매 목록조회</title>
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
-
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 
 function fncGetList(currentPage) {
@@ -40,6 +40,27 @@ function fncGetList(currentPage) {
 	$("#currentPage").val(currentPage);
    	$("form").attr("method" , "POST").attr("action" , "/purchase/listPurchase").submit();
 }
+
+$(function() {
+	
+	$( ".ct_list_pop td:nth-child(1)" ).on("click" , function() {
+			
+			self.location = "/purchase/getPurchase?tranNo="+$($('input:hidden[name="tranNo"]')[$(".ct_list_pop td:nth-child(1)").index(this)]).val()
+	});
+	
+	$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
+		
+		self.location = "/user/getUser?userId="+$($('input:hidden[name="userId"]')[$(".ct_list_pop td:nth-child(3)").index(this)]).val()
+	});
+	
+	$( "td.ct_condition:contains('물건도착')" ).on("click" , function() {
+		 self.location = "/purchase/updateTranCode?tranNo="+$($('input:hidden[name="tranNo"]')[$(".ct_list_pop td:nth-child(11)").index(this)]).val()+"&tranCode="+
+		 +$($('input:hidden[name="tranCode"]')[$(".ct_list_pop td:nth-child(11)").index(this)]).val();
+	});
+	
+});
+
+
 </script>
 </head>
 
@@ -97,11 +118,15 @@ function fncGetList(currentPage) {
 		<c:set var="i" value="${ i+1 }" />
 	<tr class="ct_list_pop">
 		<td align="center">
-			<a href="/purchase/getPurchase?tranNo=${purchase.tranNo}">${ i }</a>
+		<input type="hidden" name="tranNo" value="${purchase.tranNo}">
+			<!-- <a href="/purchase/getPurchase?tranNo=${purchase.tranNo}">${ i }</a>-->
+			<ins>${ i }</ins>
 		</td>
 		<td></td>
 		<td align="left">
-			<a href="/user/getUser?userId=${purchase.buyer.userId }">${purchase.buyer.userId }</a>
+		<input type="hidden" name="userId" value="${purchase.buyer.userId}">
+			<!-- <a href="/user/getUser?userId=${purchase.buyer.userId }">${purchase.buyer.userId }</a>-->
+			<ins>${purchase.buyer.userId }</ins>
 		</td>
 		<td></td>
 		<td align="left">${purchase.receiverName}</td>
@@ -109,11 +134,13 @@ function fncGetList(currentPage) {
 		<td align="left">${purchase.receiverPhone}</td>
 		<td></td>
 		<td align="left"><c:if test = "${purchase.tranCode==null}">
+		<input type="hidden" name="tranCode" value="${purchase.tranCode}">
 				판매중
 			</c:if>
 			<c:if test = "${purchase.tranCode=='0  '}">
 				구매완료
 				<a href="/purchase/updatePurchase?tranNo=${purchase.tranNo}">배송정보수정</a>
+				
 				<a href="/purchase/deletePurchase?tranNo=${purchase.tranNo}">환불하기</a>
 			</c:if>
 			<c:if test = "${purchase.tranCode=='1  '}">
@@ -123,7 +150,7 @@ function fncGetList(currentPage) {
 				배송완료  (배송지 : ${purchase.divyAddr})
 			</c:if></td>
 		<td></td>
-		<td align="left">
+		<td align="left" class="ct_condition">
 		<c:if test = "${purchase.tranCode=='1  '}">
 			배송중 (정보수정,환불불가)
 		</c:if>
@@ -131,7 +158,8 @@ function fncGetList(currentPage) {
 			배송완료 (정보수정,환불불가)
 		</c:if>
 		<c:if test = "${purchase.tranCode=='1  '}">
-		<a href="/purchase/updateTranCode?tranNo=${purchase.tranNo}&tranCode=${purchase.tranCode}">물건도착</a>		
+		<!-- <a href="/purchase/updateTranCode?tranNo=${purchase.tranNo}&tranCode=${purchase.tranCode}">물건도착</a>		 -->
+			<ins>물건도착</ins>
 		</c:if>
 		</td>
 	</tr>

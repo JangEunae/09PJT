@@ -42,22 +42,34 @@ function fncGetList(currentPage) {
 
 	$(function() {
 	 
-	 $( "td.ct_btn01:contains('검색')" ).on("click" , function() {
-		fncGetList(1);
-	 })
-	});
-	
-	$(function() {
+		 $( "td.ct_btn01:contains('검색')" ).on("click" , function() {
+			fncGetList(1);
+		 });
 		
 		$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
-			if("${param.menu=='manage'}"){
-				self.location = "/product/updateProduct?prodNo="+$('input:hidden[name="prodNo"]').val()+"&menu=${param.menu}";
-			}else if("${param.menu}=='search'"){
-				if("${product.proTranCode==null}"){
-			self.location =  "/product/getProduct?prodNo="+$('input:hidden[name="prodNo"]').val()+"&menu=${param.menu}";
-			//	}else if("${product.proTranCode=='0  '||product.proTranCode=='1  '||product.proTranCode=='2  '}"){
+			if(${param.menu=='manage'}){
+				self.location = "/product/updateProduct?prodNo="+$($('input:hidden[name="prodNo"]')[$(".ct_list_pop td:nth-child(3)").index(this)]).val()+"&menu=${param.menu}";
 			}
-		 });
+			else if(${param.menu=='search'}){
+				if($($('input[name="proTranCode"]')[$(".ct_list_pop td:nth-child(3)").index(this)]).val()==''){
+					self.location = "/product/getProduct?prodNo="+$($('input:hidden[name="prodNo"]')[$(".ct_list_pop td:nth-child(3)").index(this)]).val()+"&menu=${param.menu}";
+					}else {
+				}
+			}
+			
+		});
+		
+		$( "td.ct_condition:contains('배송하기')" ).on("click" , function() {
+			 self.location = "/purchase/updateTranCodeByProd?prodNo="+$($('input:hidden[name="prodNo"]')[$(".ct_list_pop td:nth-child(7)").index(this)]).val()+
+					 "&proTranCode="+$($('input:hidden[name="proTranCode"]')[$(".ct_list_pop td:nth-child(7)").index(this)]).val();
+		});
+		
+		$( "td.ct_condition:contains('배송완료확인')" ).on("click" , function() {
+			 self.location = "/purchase/updateTranCodeByProd?prodNo="+$($('input:hidden[name="prodNo"]')[$(".ct_list_pop td:nth-child(7)").index(this)]).val()+"&proTranCode="
+					 +$($('input:hidden[name="proTranCode"]')[$(".ct_list_pop td:nth-child(7)").index(this)]).val();
+			 
+		});
+		 
 	});
 	 
 </script>
@@ -197,11 +209,11 @@ function fncGetList(currentPage) {
 
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
-	<tr>
+	<tr class="ct_price">
 		<td colspan="3" >
 		전체 ${resultPage.totalCount} 건수, 현재 ${resultPage.currentPage}  페이지 		
 		</td>
-		<td colspan="8" align="right" class="ct_price">
+		<td colspan="8" align="right" >
 
 		<!--  <input type="hidden" name="searchOption" id="searchOption" >-->
 		<a href="/product/listProduct?menu=${param.menu}&searchOption=0&searchCondition=${search.searchCondition}&searchKeyword=${search.searchKeyword}">높은 가격순▲ </a>
@@ -253,35 +265,44 @@ function fncGetList(currentPage) {
 			<td align="center">${ i }</td>
 			<td></td>
 				<c:if test = "${param.menu=='manage'}">					
-				<td align="left">
-				<input type="hidden" name="prodNo" value="${product.prodNo}">
-				<!--<a href="/product/updateProduct?prodNo=${product.prodNo}&menu=${param.menu}">${product.prodName}</a>-->
-				${product.prodName},${product.prodNo}
-				</td>		
+					<td align="left">
+					<input type="hidden" name="prodNo" value="${product.prodNo}">
+					<input type="hidden" name="proTranCode" value="${product.proTranCode}">
+					<!--<a href="/product/updateProduct?prodNo=${product.prodNo}&menu=${param.menu}">${product.prodName}</a>-->
+					<ins>${product.prodName}</ins>
+					</td>		
 				</c:if>
 				<c:if test = "${param.menu=='search'}">
 					<c:if test = "${product.proTranCode==null}">
 				<td align="left">
 				<input type="hidden" name="prodNo" value="${product.prodNo}">
+				<input type="hidden" name="proTranCode" value="${product.proTranCode}">
 				<!--<a href="/product/getProduct?prodNo=${product.prodNo}&menu=${param.menu}">${product.prodName}</a>-->
-				${product.prodName}
+				<ins>${product.prodName}</ins>
 				</td>
 				</c:if>
 				<c:if test = "${product.proTranCode=='0  '||product.proTranCode=='1  '||product.proTranCode=='2  '}">
-				<td align="left">${product.prodName}</td>
+				<td align="left">
+				<font color="gray">${product.prodName}</font>
+				<input type="hidden" name="proTranCode" value="${product.proTranCode}">
+				<input type="hidden" name="prodNo" value="${product.prodNo}">
+				</td>
 				</c:if>
 				</c:if>
 			<td></td>
 			<td align="left">${product.price}</td>
 			<td></td>
-			<td align="left">
+			<td align="left" class="ct_condition">
+			<!-- <input type="hidden" name="prodNo" value="${product.prodNo}">
+			<input type="hidden" name="proTranCode" value="${product.proTranCode}"> -->
 			<c:if test = "${product.proTranCode==null}">
 				판매중
 			</c:if>
 			<c:if test = "${product.proTranCode=='0  '}">
 				<c:if test = "${param.menu=='manage'}">
 				구매완료
-					<a href="/purchase/updateTranCodeByProd?prodNo=${product.prodNo}&proTranCode=${product.proTranCode}">배송하기</a>
+					<!-- <a href="/purchase/updateTranCodeByProd?prodNo=${product.prodNo}&proTranCode=${product.proTranCode}">배송하기</a> -->
+					<ins>배송하기 </ins>
 				</c:if>	
 				<c:if test = "${param.menu=='search'}">
 				재고없음
@@ -290,7 +311,8 @@ function fncGetList(currentPage) {
 			<c:if test = "${product.proTranCode=='1  '}">
 				배송중
 				<c:if test = "${param.menu=='manage'}">
-					<a href="/purchase/updateTranCodeByProd?prodNo=${product.prodNo}&proTranCode=${product.proTranCode}">배송완료</a>
+					<!--<a href="/purchase/updateTranCodeByProd?prodNo=${product.prodNo}&proTranCode=${product.proTranCode}">배송완료확인</a> -->
+					<ins>배송완료확인</ins>
 				</c:if>
 			</c:if>
 			<c:if test = "${product.proTranCode=='2  '}">

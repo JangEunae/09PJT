@@ -18,7 +18,7 @@
 	<script type="text/javascript">
 	
 	$(function() {
-		 $( "td.ct_btn01:contains('확인')" ).on("click" , function() {
+		 $( "td.ct_btn00:contains('확인')" ).on("click" , function() {
 			 self.location = "/product/listProduct?menu=manage";
 		});
 		
@@ -110,7 +110,7 @@
 				<td width="17" height="23">
 					<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 				</td>
-				<td background="/images/ct_btnbg02.gif" class="ct_btn01"	style="padding-top: 3px;">
+				<td background="/images/ct_btnbg02.gif" class="ct_btn00"	style="padding-top: 3px;">
 				<!--	<a href="/product/listProduct?menu=manage">확인</a> -->
 				확인
 				</td>
